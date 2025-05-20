@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mein Life-Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 40px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #fff;
+      padding: 10px;
+      margin: 10px 0;
+      border-left: 5px solid green;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🗓️ Mein Life-Planner</h1>
+
+  <h2>🛒 Geplante Einkäufe</h2>
+
+  <input type="text" id="neuerEintrag" placeholder="Artikel eingeben..." />
+  <button onclick="hinzufuegen()">Hinzufügen</button>
+
+  <ul id="liste">
+    <!-- Neue Einträge erscheinen hier -->
+  </ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
