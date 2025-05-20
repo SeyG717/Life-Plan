@@ -1,83 +1,41 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Mein Life-Planner</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      padding: 20px;
-    }
-
-    h2 {
       text-align: center;
+      background-color: #f0f0f0;
+      padding: 50px;
     }
 
-    label, select, input, button {
-      font-size: 16px;
-      margin: 5px;
+    h1 {
+      margin-bottom: 40px;
     }
 
-    input, select {
-      padding: 8px;
-      width: 200px;
+    a.button {
+      display: inline-block;
+      padding: 20px 30px;
+      margin: 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 10px;
+      transition: background-color 0.2s;
     }
 
-    button {
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-
-    hr {
-      margin: 20px 0;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    li {
-      background: #fff;
-      padding: 10px;
-      margin: 5px 0;
-      border-left: 5px solid #007bff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    li button {
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      color: red;
+    a.button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-
-  <h2>🗂️ Mein Life-Planner</h2>
-
-  <label for="kategorie">Kategorie wählen:</label>
-  <select id="kategorie">
-    <option value="einkauf">🛒 Einkauf</option>
-    <option value="ausgaben">💸 Ausgaben</option>
-    <option value="ziele">🎯 Ziele</option>
-  </select>
-
-  <input type="text" id="eintrag" placeholder="Eintrag hinzufügen..." />
-  <button onclick="hinzufuegen()">Hinzufügen</button>
-
-  <hr />
-
-  <div id="anzeigen">
-    <!-- Hier erscheinen die Listen für alle Kategorien -->
-  </div>
-
-  <script src="script.js"></script>
+  <h1>📘 Mein Life-Planner</h1>
+  <a href="einkauf.html" class="button">🛒 Einkauf</a>
+  <a href="ausgaben.html" class="button">💸 Ausgaben</a>
+  <a href="ziele.html" class="button">🎯 Ziele</a>
 </body>
 </html>
