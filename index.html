@@ -6,12 +6,31 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 40px;
+      background-color: #f9f9f9;
+      padding: 20px;
     }
 
-    h1 {
+    h2 {
       text-align: center;
+    }
+
+    label, select, input, button {
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    input, select {
+      padding: 8px;
+      width: 200px;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    hr {
+      margin: 20px 0;
     }
 
     ul {
@@ -22,31 +41,42 @@
     li {
       background: #fff;
       padding: 10px;
-      margin: 10px 0;
-      border-left: 5px solid green;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 5px 0;
+      border-left: 5px solid #007bff;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    input, button {
-      padding: 10px;
+    li button {
+      background: none;
+      border: none;
       font-size: 16px;
-      margin: 10px 0;
+      cursor: pointer;
+      color: red;
     }
   </style>
 </head>
 <body>
-  <h1>🗓️ Mein Life-Planner</h1>
 
-  <h2>🛒 Geplante Einkäufe</h2>
+  <h2>🗂️ Mein Life-Planner</h2>
 
-  <input type="text" id="neuerEintrag" placeholder="Artikel eingeben..." />
+  <label for="kategorie">Kategorie wählen:</label>
+  <select id="kategorie">
+    <option value="einkauf">🛒 Einkauf</option>
+    <option value="ausgaben">💸 Ausgaben</option>
+    <option value="ziele">🎯 Ziele</option>
+  </select>
+
+  <input type="text" id="eintrag" placeholder="Eintrag hinzufügen..." />
   <button onclick="hinzufuegen()">Hinzufügen</button>
 
-  <ul id="liste">
-    <!-- Neue Einträge erscheinen hier -->
-  </ul>
+  <hr />
+
+  <div id="anzeigen">
+    <!-- Hier erscheinen die Listen für alle Kategorien -->
+  </div>
 
   <script src="script.js"></script>
 </body>
