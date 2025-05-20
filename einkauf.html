@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>💸 Ausgabenliste</title>
+  <title>🛒 Einkaufsliste</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
       padding: 10px;
       display: flex;
       justify-content: space-between;
-      border-left: 4px solid crimson;
+      border-left: 4px solid green;
     }
     .delete {
       background: none;
@@ -44,15 +44,18 @@
   </style>
 </head>
 <body>
-  <h2>💸 Ausgabenliste</h2>
+  <h2>🛒 Einkaufsliste</h2>
 
-  <input type="text" id="eintrag" placeholder="Ausgabe eintragen..." />
+  <!-- ✅ Hier kommt dein Code rein -->
+  <input type="text" id="eintrag" placeholder="Artikel eingeben..." />
   <button onclick="hinzufuegen()">Hinzufügen</button>
 
   <ul id="liste"></ul>
 
+  <!-- 🔁 Zurück zur Startseite -->
   <a href="index.html" class="back">⬅️ Zurück zur Startseite</a>
 
+  <!-- 📎 Skript einbinden -->
   <script src="script.js"></script>
 </body>
 </html>
