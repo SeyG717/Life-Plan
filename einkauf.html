@@ -1,50 +1,58 @@
-// Automatisch erkennen, auf welcher Seite wir sind
-let dateiname = window.location.pathname.split("/").pop();
-let kategorie = "";
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>💸 Ausgabenliste</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin: 5px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-left: 4px solid crimson;
+    }
+    .delete {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .back {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>💸 Ausgabenliste</h2>
 
-if (dateiname.includes("einkauf")) kategorie = "einkauf";
-else if (dateiname.includes("ausgaben")) kategorie = "ausgaben";
-else if (dateiname.includes("ziele")) kategorie = "ziele";
-else kategorie = null;
+  <input type="text" id="eintrag" placeholder="Ausgabe eintragen..." />
+  <button onclick="hinzufuegen()">Hinzufügen</button>
 
-// Nur ausführen, wenn wir in einer gültigen Kategorie-Seite sind
-if (kategorie) {
-  // Einträge beim Laden anzeigen
-  window.onload = function () {
-    const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
-    daten.forEach(text => eintragAnzeigen(text));
-  };
+  <ul id="liste"></ul>
 
-  // Funktion zum Hinzufügen eines neuen Eintrags
-  function hinzufuegen() {
-    const input = document.getElementById("eintrag");
-    const text = input.value.trim();
-    if (text === "") return;
+  <a href="index.html" class="back">⬅️ Zurück zur Startseite</a>
 
-    const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
-    daten.push(text);
-    localStorage.setItem(kategorie, JSON.stringify(daten));
-
-    eintragAnzeigen(text);
-    input.value = "";
-  }
-
-  // Funktion zum Anzeigen eines Listeneintrags mit Löschen
-  function eintragAnzeigen(text) {
-    const li = document.createElement("li");
-    li.textContent = text;
-
-    const btn = document.createElement("button");
-    btn.textContent = "🗑️";
-    btn.className = "delete";
-    btn.onclick = function () {
-      let daten = JSON.parse(localStorage.getItem(kategorie)) || [];
-      daten = daten.filter(e => e !== text);
-      localStorage.setItem(kategorie, JSON.stringify(daten));
-      li.remove();
-    };
-
-    li.appendChild(btn);
-    document.getElementById("liste").appendChild(li);
-  }
-}
+  <script src="script.js"></script>
+</body>
+</html>
