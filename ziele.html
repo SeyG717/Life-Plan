@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>🛒 Ziele</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f9f9f9; }
+    h2 { text-align: center; }
+    input, button { padding: 10px; margin: 5px; }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      background: #fff; margin: 5px 0; padding: 10px;
+      border-left: 5px solid green; display: flex; justify-content: space-between;
+    }
+    button.delete { background: none; border: none; color: red; cursor: pointer; }
+    .back { margin-top: 20px; display: block; }
+  </style>
+</head>
+<body>
+  <h2>🛒 Ziele</h2>
+
+  <input type="text" id="eintrag" placeholder="Ziele eingeben..." />
+  <button onclick="hinzufuegen()">Hinzufügen</button>
+
+  <ul id="liste"></ul>
+
+  <a href="index.html" class="back">⬅️ Zurück zur Startseite</a>
+
+  <script>
+    const kategorie = "Ziele";
+
+    window.onload = function () {
+      const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+      daten.forEach(text => eintragAnzeigen(text));
+    };
+
+    function hinzufuegen() {
+      const input = document.getElementById("eintrag");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+      daten.push(text);
+      localStorage.setItem(kategorie, JSON.stringify(daten));
+
+      eintragAnzeigen(text);
+      input.value = "";
+    }
+
+    function eintragAnzeigen(text) {
+      const li = document.createElement("li");
+      li.textContent = text;
+
+      const btn = document.createElement("button");
+      btn.textContent = "🗑️";
+      btn.className = "delete";
+      btn.onclick = function () {
+        let daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+        daten = daten.filter(e => e !== text);
+        localStorage.setItem(kategorie, JSON.stringify(daten));
+        li.remove();
+      };
+
+      li.appendChild(btn);
+      document.getElementById("liste").appendChild(li);
+    }
+  </script>
+</body>
+</html>
