@@ -1,64 +1,50 @@
-// Seite lädt: Einträge aus allen Kategorien anzeigen
-window.onload = function () {
-  ["einkauf", "ausgaben", "ziele"].forEach(kategorie => {
-    zeigeKategorie(kategorie);
-  });
-};
+// Automatisch erkennen, auf welcher Seite wir sind
+let dateiname = window.location.pathname.split("/").pop();
+let kategorie = "";
 
-function hinzufuegen() {
-  const text = document.getElementById("eintrag").value.trim();
-  const kategorie = document.getElementById("kategorie").value;
+if (dateiname.includes("einkauf")) kategorie = "einkauf";
+else if (dateiname.includes("ausgaben")) kategorie = "ausgaben";
+else if (dateiname.includes("ziele")) kategorie = "ziele";
+else kategorie = null;
 
-  if (text === "") return;
+// Nur ausführen, wenn wir in einer gültigen Kategorie-Seite sind
+if (kategorie) {
+  // Einträge beim Laden anzeigen
+  window.onload = function () {
+    const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+    daten.forEach(text => eintragAnzeigen(text));
+  };
 
-  const eintraege = JSON.parse(localStorage.getItem(kategorie)) || [];
-  eintraege.push(text);
-  localStorage.setItem(kategorie, JSON.stringify(eintraege));
+  // Funktion zum Hinzufügen eines neuen Eintrags
+  function hinzufuegen() {
+    const input = document.getElementById("eintrag");
+    const text = input.value.trim();
+    if (text === "") return;
 
-  document.getElementById("eintrag").value = "";
-  zeigeKategorie(kategorie);
-}
+    const daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+    daten.push(text);
+    localStorage.setItem(kategorie, JSON.stringify(daten));
 
-function zeigeKategorie(kategorie) {
-  const container = document.getElementById("anzeigen");
-
-  // Prüfen, ob der Bereich für die Kategorie schon da ist
-  let bereich = document.getElementById("bereich-" + kategorie);
-  if (!bereich) {
-    bereich = document.createElement("div");
-    bereich.id = "bereich-" + kategorie;
-    bereich.innerHTML = `<h3>${getKategorieTitel(kategorie)}</h3><ul id="liste-${kategorie}"></ul>`;
-    container.appendChild(bereich);
+    eintragAnzeigen(text);
+    input.value = "";
   }
 
-  const liste = document.getElementById("liste-" + kategorie);
-  liste.innerHTML = "";
-
-  const eintraege = JSON.parse(localStorage.getItem(kategorie)) || [];
-
-  eintraege.forEach((text, index) => {
+  // Funktion zum Anzeigen eines Listeneintrags mit Löschen
+  function eintragAnzeigen(text) {
     const li = document.createElement("li");
     li.textContent = text;
 
-    // Löschen-Button
     const btn = document.createElement("button");
     btn.textContent = "🗑️";
+    btn.className = "delete";
     btn.onclick = function () {
-      eintraege.splice(index, 1);
-      localStorage.setItem(kategorie, JSON.stringify(eintraege));
-      zeigeKategorie(kategorie);
+      let daten = JSON.parse(localStorage.getItem(kategorie)) || [];
+      daten = daten.filter(e => e !== text);
+      localStorage.setItem(kategorie, JSON.stringify(daten));
+      li.remove();
     };
 
     li.appendChild(btn);
-    liste.appendChild(li);
-  });
-}
-
-function getKategorieTitel(kategorie) {
-  switch (kategorie) {
-    case "einkauf": return "🛒 Einkauf";
-    case "ausgaben": return "💸 Ausgaben";
-    case "ziele": return "🎯 Ziele";
-    default: return kategorie;
+    document.getElementById("liste").appendChild(li);
   }
 }
