@@ -1,11 +1,12 @@
 // Automatisch erkennen, auf welcher Seite wir sind
-let dateiname = window.location.pathname.split("/").pop();
+let dateiname = window.location.pathname.split("/").pop().toLowerCase();
 let kategorie = "";
 
-if (dateiname.includes("einkauf")) kategorie = "einkauf";
-else if (dateiname.includes("ausgaben")) kategorie = "ausgaben";
-else if (dateiname.includes("ziele")) kategorie = "ziele";
+if (dateiname === "einkauf.html") kategorie = "einkauf";
+else if (dateiname === "ausgaben.html") kategorie = "ausgaben";
+else if (dateiname === "ziele.html") kategorie = "ziele";
 else kategorie = null;
+
 
 // Nur ausführen, wenn wir in einer gültigen Kategorie-Seite sind
 if (kategorie) {
