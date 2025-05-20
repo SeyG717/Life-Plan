@@ -2,37 +2,37 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>🛒 Einkaufsliste</title>
+  <title>🛒 Einkaufsliste (Firebase)</title>
 </head>
 <body>
   <h1>🛒 Gemeinsame Einkaufsliste</h1>
 
   <input id="eintrag" type="text" placeholder="Artikel eingeben..." />
   <button onclick="hinzufuegen()">Hinzufügen</button>
+
   <ul id="liste"></ul>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase Browser SDK (Compat-Version) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
   <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBQtBNI52qldGhhcwdicN3vLdOP5Tmldy0",
-    authDomain: "life-planner-8f9c9.firebaseapp.com",
-    databaseURL: "https://life-planner-8f9c9-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "life-planner-8f9c9",
-    storageBucket: "life-planner-8f9c9.firebasestorage.app",
-    messagingSenderId: "147287272242",
-    appId: "1:147287272242:web:65bafb8a8f881eaeaf452b",
-    measurementId: "G-7DZLW93S4V"
-  };
-
+    const firebaseConfig = {
+      apiKey: "AIzaSyBQtBNI52qldGhhcwdicN3vLdOP5Tmldy0",
+      authDomain: "life-planner-8f9c9.firebaseapp.com",
+      databaseURL: "https://life-planner-8f9c9-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "life-planner-8f9c9",
+      storageBucket: "life-planner-8f9c9.firebasestorage.app",
+      messagingSenderId: "147287272242",
+      appId: "1:147287272242:web:65bafb8a8f881eaeaf452b",
+      measurementId: "G-7DZLW93S4V"
+    };
 
     // Firebase starten
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Eintrag hinzufügen
+    // Neuen Eintrag speichern
     function hinzufuegen() {
       const eingabe = document.getElementById("eintrag").value.trim();
       if (!eingabe) return;
