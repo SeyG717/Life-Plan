@@ -3,43 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <title>🛒 Einkaufsliste</title>
-  <style>
-    body { font-family: Arial; background-color: #f4f4f4; padding: 20px; }
-    h2 { text-align: center; }
-    input, button { padding: 10px; font-size: 16px; margin: 5px 0; }
-    ul { list-style-type: none; padding: 0; }
-    li {
-      background: white;
-      margin: 5px 0;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      border-left: 4px solid green;
-    }
-    .delete {
-      background: none;
-      border: none;
-      color: red;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .back {
-      display: block;
-      margin-top: 20px;
-      text-decoration: none;
-    }
-  </style>
 </head>
 <body>
-  <h2>🛒 Einkaufsliste</h2>
+  <h1>🛒 Gemeinsame Einkaufsliste</h1>
 
-  <input type="text" id="eintrag" placeholder="Artikel eingeben..." />
+  <input id="eintrag" type="text" placeholder="Artikel eingeben..." />
   <button onclick="hinzufuegen()">Hinzufügen</button>
-
   <ul id="liste"></ul>
 
-  <a href="index.html" class="back">⬅️ Zurück zur Startseite</a>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
-  <script src="script.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "DEIN_API_KEY",
+      authDomain: "life-planner-8f9c9.firebaseapp.com",
+      databaseURL: "https://life-planner-8f9c9-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "life-planner-8f9c9",
+      storageBucket: "life-planner-8f9c9.appspot.com",
+      messagingSenderId: "DEINE_SENDER_ID",
+      appId: "DEINE_APP_ID"
+    };
+
+    // Firebase starten
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Eintrag hinzufügen
+    function hinzufuegen() {
+      const eingabe = document.getElementById("eintrag").value.trim();
+      if (!eingabe) return;
+
+      db.ref("einkauf").push({
+        text: eingabe,
+        timestamp: Date.now()
+      });
+
+      document.getElementById("eintrag").value = "";
+    }
+
+    // Einträge anzeigen
+    db.ref("einkauf").on("child_added", function(snapshot) {
+      const daten = snapshot.val();
+      const li = document.createElement("li");
+      li.textContent = daten.text;
+      document.getElementById("liste").appendChild(li);
+    });
+  </script>
 </body>
 </html>
