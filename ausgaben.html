@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>💸 Ausgabenliste</title>
+  <style>
+    body { font-family: Arial; background-color: #f4f4f4; padding: 20px; }
+    h2 { text-align: center; }
+    input, button { padding: 10px; font-size: 16px; margin: 5px 0; }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      background: white;
+      margin: 5px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-left: 4px solid crimson;
+    }
+    .delete {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .back {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>💸 Ausgabenliste</h2>
+
+  <input type="text" id="eintrag" placeholder="Ausgabe eintragen..." />
+  <button onclick="hinzufuegen()">Hinzufügen</button>
+
+  <ul id="liste"></ul>
+
+  <a href="index.html" class="back">⬅️ Zurück zur Startseite</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
